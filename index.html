@@ -6,11 +6,25 @@
 </head>
 <body>
 
+<!--
+stop - Prevents event bubbling up the DOM tree.
+prevent - Prevents default behavior.
+capture - Capture mode is used for event handling.
+self - Only trigger if the target of the event is itself.
+once - Run the function at most once.
+-->
 
 <div id="app">
-    <h2>{{ title }} = {{ counter }}</h2>
-    <button v-on:click="onClickButton(5, 'Изменено на 5', $event)">Увеличить на 5</button>
-    <button v-on:click="onClickButton(10, 'Изменено на 10', $event)">Увеличить на 10</button>
+    <!--        event modifiers prevent works as event.preventDefault()-->
+    <h2>
+        <a href="https://google.com" v-on:click.prevent="">Google</a>
+    </h2>
+
+    <!--        event modifiers stop works as event.stopPropagation()-->
+    <h2 v-on:mousemove="handleMouseMove">
+        X: {{ x }} \ Y: {{ y }}
+        <span v-on:mousemove.stop>Не изменять</span>
+    </h2>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -20,20 +34,14 @@
     new Vue({
         el: '#app',
         data: {
-            counter: 0,
-            title: 'Счетчик'
+            x: 0,
+            y: 0,
         },
         methods: {
-            onClickButton(num, str, event) {
-                this.counter += num;
-                this.title = str;
-
-                if (num === 5){
-                    event.target.style.color = 'blue';
-                } else {
-                    event.target.style.color = 'red';
-                }
-            },
+            handleMouseMove(event) {
+                this.x = event.clientX;
+                this.y = event.clientY;
+            }
         }
     });
 </script>
