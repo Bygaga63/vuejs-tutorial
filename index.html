@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>java script</title>
+    <title>Vue.js</title>
 </head>
 <body>
 
@@ -10,6 +10,14 @@
 <div id="app">
     <h2>Счетчик = {{ counter }}</h2>
     <button v-on:click="onClickButton">Увеличить</button>
+
+    <hr>
+
+<!--    если операция простая, можно не создавать функцию counter2++-->
+<!--    все events полностью соответствуют js events-->
+    <h2 v-on:mouseout="onMouseOut" v-on:mouseover="onHover">Счетчик 2 = {{ counter2 }}</h2>
+    <button v-on:click="counter2++">Увеличить</button>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -19,11 +27,20 @@
     new Vue({
         el: '#app',
         data: {
-            counter: 0
+            counter: 0,
+            counter2: 0,
         },
         methods: {
             onClickButton: function () {
                 this.counter++
+            },
+            onHover: function (event) {
+                console.log(event);
+                event.target.style.color = 'red'
+            },
+            onMouseOut: function (event) {
+                event.target.style.color = 'black'
+
             }
         }
     });
