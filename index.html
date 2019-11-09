@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>java script</title>
+</head>
+<body>
+
+
+<div id="app">
+    <h2>Счетчик = {{ counter }}</h2>
+    <button v-on:click="onClickButton">Увеличить</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            counter: 0
+        },
+        methods: {
+            onClickButton: function () {
+                this.counter++
+            }
+        }
+    });
+</script>
+
+
+</body>
+
+</html>
