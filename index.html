@@ -8,9 +8,9 @@
 
 
 <div id="app">
-    <h2>Счетчик = {{ counter }}</h2>
-    <button v-on:click="onClickButton(amount1)">Увеличить на 5</button>
-    <button v-on:click="onClickButton(amount2)">Увеличить на 10</button>
+    <h2>{{ title }} = {{ counter }}</h2>
+    <button v-on:click="onClickButton(5, 'Изменено на 5', $event)">Увеличить на 5</button>
+    <button v-on:click="onClickButton(10, 'Изменено на 10', $event)">Увеличить на 10</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -21,12 +21,18 @@
         el: '#app',
         data: {
             counter: 0,
-            amount1: 5,
-            amount2: 10,
+            title: 'Счетчик'
         },
         methods: {
-            onClickButton(amount) {
-                this.counter += amount
+            onClickButton(num, str, event) {
+                this.counter += num;
+                this.title = str;
+
+                if (num === 5){
+                    event.target.style.color = 'blue';
+                } else {
+                    event.target.style.color = 'red';
+                }
             },
         }
     });
