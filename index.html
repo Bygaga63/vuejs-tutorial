@@ -9,15 +9,8 @@
 
 <div id="app">
     <h2>Счетчик = {{ counter }}</h2>
-    <button v-on:click="onClickButton">Увеличить</button>
-
-    <hr>
-
-<!--    если операция простая, можно не создавать функцию counter2++-->
-<!--    все events полностью соответствуют js events-->
-    <h2 v-on:mouseout="onMouseOut" v-on:mouseover="onHover">Счетчик 2 = {{ counter2 }}</h2>
-    <button v-on:click="counter2++">Увеличить</button>
-
+    <button v-on:click="onClickButton(amount1)">Увеличить на 5</button>
+    <button v-on:click="onClickButton(amount2)">Увеличить на 10</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -28,20 +21,13 @@
         el: '#app',
         data: {
             counter: 0,
-            counter2: 0,
+            amount1: 5,
+            amount2: 10,
         },
         methods: {
-            onClickButton: function () {
-                this.counter++
+            onClickButton(amount) {
+                this.counter += amount
             },
-            onHover: function (event) {
-                console.log(event);
-                event.target.style.color = 'red'
-            },
-            onMouseOut: function (event) {
-                event.target.style.color = 'black'
-
-            }
         }
     });
 </script>
